@@ -1,5 +1,8 @@
 package string.calculator;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class StringCalculator {
 	
 	public StringCalculator(){
@@ -7,20 +10,34 @@ public class StringCalculator {
 	}
 	
 	
-	public int Add(String s) {
+	public int Add(String... str) {
 		
-		//Splitting the string for comma(,)
 		
-		if(s.equals(" ")||s.equals(""))
+		List<String> list = new ArrayList<>();
+		
+		for(String s: str) {
+			list.add(s);
+		}
+		
+		if(list.size()==0)
 			return 0;
 		
-		String[] str = s.split("\\,");
+		int sum = 0;
 		
-		if(str.length==1)
-			return Integer.parseInt(str[0]);
+		for(String s:list) {
+			
+			if(s.equals(" ")||s.equals(""))
+				continue;
+			
+			String[] strs = s.split("\\,");
+			
+			if(strs.length==1)
+				sum+=Integer.parseInt(strs[0]);
+			else
+				sum+=Integer.parseInt(strs[0])+Integer.parseInt(strs[1]);;
+		}
 		
-		return Integer.parseInt(str[0])+Integer.parseInt(str[1]);
-		
+		return sum;
 		
 	}
 
