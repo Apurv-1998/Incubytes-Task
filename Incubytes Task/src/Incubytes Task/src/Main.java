@@ -21,7 +21,7 @@ public class Main {
 			
 			String s = input.next().trim();
 			
-			if(s.length()==0)
+			if(s.length()==0 || s.equals("z"))
 				break;
 			
 			list.add(s);
