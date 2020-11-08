@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StringCalculator {
+	
+	private List<String> negatives;
 
 	public StringCalculator() {
 
@@ -12,6 +14,8 @@ public class StringCalculator {
 	public int Add(String... str) {
 
 		List<String> list = new ArrayList<>();
+		
+		negatives = new ArrayList<>();
 
 		for (String s : str) {
 			list.add(s);
@@ -36,17 +40,18 @@ public class StringCalculator {
 				
 				for(int i=0;i<strs.length;i++) {
 					if(checkNewLineBetweenCharacters(strs[i])) {
-	//					System.out.println("Part 1"+sum);
 						sum+= calculateString(strs[i]);
 					}
 				}
 				
 			}
 			else if (checkNewLineBetweenCharacters(s.trim())) {
-	//			System.out.println("Part 1"+sum);
 				sum+= calculateString(s);
 			}
 		}
+		
+		if(negatives.size()!=0)
+			throw new IllegalArgumentException("Negative Values Not Allowed -> "+negatives);
 
 		return sum;
 
@@ -55,19 +60,34 @@ public class StringCalculator {
 	int calculateString(String s) {
 		int sum=0;
 		String ans = "";
+		
 		for (int i = 0; i < s.length(); i++) {
-			if (Character.isDigit(s.charAt(i)))
+			if (Character.isDigit(s.charAt(i))||s.charAt(i)=='-') {
 				ans += s.charAt(i);
+			}
 			else {
-				if (!ans.equals("") && !ans.equals(" "))
-					sum += Integer.parseInt(ans);
+				if (!ans.equals("") && !ans.equals(" ")) {
+					if(ans.charAt(0)=='-') {
+						negatives.add(ans);
+					}
+					else {
+						if(Integer.parseInt(ans)<=1000)
+							sum += Integer.parseInt(ans);
+					}
+				}
 				ans = "";
 			}
 		}
 
-		if (!ans.equals("") && !ans.equals(" "))
-			sum += Integer.parseInt(ans);
-		
+		if (!ans.equals("") && !ans.equals(" ")) {
+			if(ans.charAt(0)=='-') {
+				negatives.add(ans);
+			}
+			else {
+				if(Integer.parseInt(ans)<=1000)
+					sum += Integer.parseInt(ans);
+			}
+		}
 		return sum;
 	}
 
