@@ -29,16 +29,52 @@ public class StringCalculator {
 			if(s.equals(" ")||s.equals(""))
 				continue;
 			
-			String[] strs = s.split("\\,");
+	//		System.out.println("String Before Work "+s);
 			
-			if(strs.length==1)
-				sum+=Integer.parseInt(strs[0]);
-			else
-				sum+=Integer.parseInt(strs[0])+Integer.parseInt(strs[1]);;
+			if(checkNewLineBetweenCharacters(s)) {
+				
+				for(int i=0;i<s.length();i++)
+					if(Character.isDigit(s.charAt(i)))
+						sum+=(s.charAt(i)-'0');
+			}
 		}
 		
 		return sum;
 		
+	}
+	
+	boolean checkNewLineBetweenCharacters(String s) {
+		
+		List<Integer> index = new ArrayList<>();
+		
+		for(int i=0;i<s.length();i++) {
+			
+			if(s.charAt(i)=='n')
+				index.add(i);
+		}
+		
+	//	System.out.println(index);
+		
+		if(index.size()==0)
+			return true;
+		
+		if(index.get(index.size()-1)==s.length()-1)
+			return false;
+		
+		for(int i=index.get(index.size()-1);i<s.length();i++)
+			if(Character.isDigit(s.charAt(i)))
+				return true;
+		
+		return false;
+		
+	}
+	
+	void printArray(String[] s) {
+		
+	//	System.out.println("After work length "+s.length);		
+		for(int i=0;i<s.length;i++)
+			System.out.print(s[i]+" ");
+		System.out.println();
 	}
 
 }

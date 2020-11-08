@@ -26,7 +26,7 @@ public class Main {
 			
 			list.add(s);
 			
-			System.out.println(list);
+			System.out.println("List -> "+list);
 			
 		}
 		
