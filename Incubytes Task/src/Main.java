@@ -11,8 +11,10 @@ public class Main {
 	
 	public static void main(String[] args) throws IOException {
 		
+		@SuppressWarnings("unused")
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
+		@SuppressWarnings("resource")
 		Scanner input = new Scanner(System.in);
 		
 		List<String> list = new ArrayList<>();

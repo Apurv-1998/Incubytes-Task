@@ -38,11 +38,11 @@ class StringCalculatorTest {
 	@Test
 	void testCustomDelimeter() {
 		StringCalculator calc = new StringCalculator();
-		int ans = calc.Add("//;\\n1;2");
+		int ans = calc.Add("//;\\n1;");
 		
-	//	System.out.println(ans);
+		System.out.println(ans);
 		
-		assertEquals(3, ans);
+		assertEquals(0, ans);
 	}
 	
 	@Test()

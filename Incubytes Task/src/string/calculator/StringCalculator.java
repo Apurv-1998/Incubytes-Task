@@ -2,6 +2,8 @@ package string.calculator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringCalculator {
 	
@@ -32,18 +34,18 @@ public class StringCalculator {
 				continue;
 
 			// System.out.println("String Before Work "+s);
-
-			if (s.startsWith("//")&&checkNewLineBetweenCharacters(s.trim())) {
-
+			
+			if(s.startsWith("//")) {
 				
-				String[] strs = s.split("\\;");
+				Matcher m = Pattern.compile("\\/\\/(.)\\\\\\\\n(.*)").matcher(s);
 				
-				for(int i=0;i<strs.length;i++) {
-					if(checkNewLineBetweenCharacters(strs[i])) {
-						sum+= calculateString(strs[i]);
-					}
+				if(m.matches()) {
+					String delimiter = m.group(1);
+					String num = m.group(2);
+					String[] strs = num.split(delimiter);
+					
+					sum+= sumStringArray(strs);
 				}
-				
 			}
 			else if (checkNewLineBetweenCharacters(s.trim())) {
 				sum+= calculateString(s);
@@ -56,6 +58,8 @@ public class StringCalculator {
 		return sum;
 
 	}
+	
+	
 	
 	int calculateString(String s) {
 		int sum=0;
@@ -123,6 +127,20 @@ public class StringCalculator {
 		for (int i = 0; i < s.length; i++)
 			System.out.print(s[i] + " ");
 		System.out.println();
+	}
+	
+	int sumStringArray(String[] s) {
+		
+		int sum=0;
+		
+		for(int i=0;i<s.length;i++) {
+			if(Integer.parseInt(s[i])<0)
+				negatives.add(s[i]);
+			else
+				sum+=Integer.parseInt(s[i]);
+		}
+		
+		return sum;
 	}
 
 }
