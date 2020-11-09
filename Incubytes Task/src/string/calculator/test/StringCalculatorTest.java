@@ -1,6 +1,7 @@
 package string.calculator.test;
 
 import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -36,22 +37,37 @@ class StringCalculatorTest {
 	}
 	
 	@Test
-	void testCustomDelimeter() {
+	void testCustomDelimeterFixedLength() {
 		StringCalculator calc = new StringCalculator();
-		int ans = calc.Add("//;\\n1;");
+		int ans = calc.Add("//;\\n12;2");
 		
 		System.out.println(ans);
 		
-		assertEquals(0, ans);
+		assertEquals(14, ans);
+	}
+	
+	@Test
+	void testCustomDelimeterVariableLength() {
+		StringCalculator calc = new StringCalculator();
+		int ans = calc.Add("//[***]\\n1***2***3");
+		
+		System.out.println(ans);
+		
+		assertEquals(6, ans);
 	}
 	
 	@Test()
 	void testNegativeValues() {
 		StringCalculator calc = new StringCalculator();
 		
-		assertThrows(IllegalArgumentException.class, ()->{
-			Integer.toString(calc.Add("//;\\n1;-2"));
-		});
+		try {
+			
+			calc.Add("-1,-2,3");
+			fail("Exception Exceptied!");
+			
+		}catch(Exception e) {
+			
+		}
 	}
 	
 	@Test()

@@ -19,6 +19,8 @@ public class Main {
 		
 		List<String> list = new ArrayList<>();
 		
+		StringCalculator stringCalculator = new StringCalculator();
+		
 		while(input.hasNext()) {
 			
 			String s = input.next().trim();
@@ -28,19 +30,23 @@ public class Main {
 			
 			list.add(s);
 			
-			System.out.println("List -> "+list);
-			
 		}
+		
+		
+		
+		
+		System.out.println("Addition Result of "+list+" is "+stringCalculator.Add(toStringArray(list)));
+		
+	}
+	
+	static String[] toStringArray(List<String> list) {
 		
 		String[] str = new String[list.size()];
 		
 		for(int i=0;i<str.length;i++)
 			str[i] = list.get(i);
 		
-		
-		StringCalculator stringCalculator = new StringCalculator();
-		
-		System.out.println("Addition Result of "+list+" is "+stringCalculator.Add(str));
+		return str;
 		
 	}
 
